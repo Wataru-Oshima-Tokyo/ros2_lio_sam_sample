@@ -1,5 +1,5 @@
 sudo apt update &&
-sudo apt install python3-colcon-common-extensions ros-humble-ros2-control \
+sudo apt install snapd python3-colcon-common-extensions ros-humble-ros2-control \
 ros-humble-ros2-controllers &&
 cd gtsam && mkdir build && cd build && cmake .. && make && sudo make install
 ##the below one is for ubuntu 20.04 
