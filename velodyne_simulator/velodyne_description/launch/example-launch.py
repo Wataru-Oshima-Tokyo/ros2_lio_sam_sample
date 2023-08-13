@@ -47,8 +47,8 @@ def read_file(path):
 
 def generate_launch_description():
     output_mode = 'both'
-    gpu = False
-    
+    gpu = False;
+
     gazebo_dir = os.path.dirname(get_package_share_directory('velodyne_description'))
     world = os.path.join(get_package_share_directory('velodyne_description'), 'world', 'lio_sam.model')
     urdf_dir =  os.path.join(get_package_share_directory('velodyne_description'),'urdf')
@@ -60,19 +60,19 @@ def generate_launch_description():
     assert os.path.exists(robot_urdf)
     urdf_contents = read_file(robot_urdf)
 
-    # rviz_config = os.path.join(
-    #     ament_index_python.packages.get_package_share_directory('velodyne_description'),
-    #     'rviz', 'example.rviz')
+    rviz_config = os.path.join(
+        ament_index_python.packages.get_package_share_directory('velodyne_description'),
+        'rviz', 'example.rviz')
 
     rsp = launch_ros.actions.Node(package='robot_state_publisher',
-                              executable='robot_state_publisher',
+                              node_executable='robot_state_publisher',
                               output='both',
                               arguments=[robot_urdf])
 
-    # rviz = launch_ros.actions.Node(package='rviz2',
-    #                           executable='rviz2',
-    #                           output='both',
-    #                           arguments=['-d', rviz_config])
+    rviz = launch_ros.actions.Node(package='rviz2',
+                              node_executable='rviz2',
+                              output='both',
+                              arguments=['-d', rviz_config])
 
     spawn_entity_message_contents = "'{initial_pose:{ position: {x: 0, y: 0, z: 0}, orientation: {x: 0.0, y: 0.0, z: 0.0, w: 0.0}},  name: \"velodyne_description\", xml: \"" + urdf_contents.replace('"', '\\"') + "\"}'"
     spawn_entity = launch.actions.ExecuteProcess(
@@ -86,19 +86,12 @@ def generate_launch_description():
 
     my_env = os.environ.copy()
     my_env["GAZEBO_MODEL_PATH"] = gazebo_dir
-    my_env["QT_QPA_PLATFORM"] = "offscreen"
-    # gazebo = launch.actions.ExecuteProcess(
-    #     name='gazebo', cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so', world], env=my_env, output=output_mode, shell=True, log_cmd=False)
-    gzserver_cmd = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(launch_file_dir, 'gzserver.launch.py')
-        ),
-        launch_arguments={'world': world}.items()
-    )
-    
+    gazebo = launch.actions.ExecuteProcess(
+        name='gazebo', cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so', world], env=my_env, output=output_mode, shell=True, log_cmd=False)
+
     return launch.LaunchDescription([rsp,
-                                    #  rviz,
-                                    #  gazebo,
+                                     rviz,
+                                     gazebo,
                                      spawn_entity,
                                      launch_urdf,
                                      launch.actions.RegisterEventHandler(
