@@ -1,0 +1,8 @@
+map_server:
+    ros__parameters:
+    frame_id: map   
+    topic_name: map
+    use_sim_time: false
+    yaml_filename: "/home/ubuntu/ros2_ws/src/turtlebot3/turtlebot3_navigation2/map/map.yaml"
+  
+
