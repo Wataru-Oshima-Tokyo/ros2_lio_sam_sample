@@ -1,0 +1,3 @@
+[submodule "sim_worlds2"]
+	path = sim_worlds2
+	url = https://github.com/TechShare-inc/sim_worlds2.git
