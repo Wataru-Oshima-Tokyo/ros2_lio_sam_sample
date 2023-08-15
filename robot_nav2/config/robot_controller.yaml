@@ -68,8 +68,8 @@ robot/local_costmap:
     ros__parameters:
       update_frequency: 5.0
       publish_frequency: 2.0
-      global_frame: "robot/odom"
-      robot_base_frame: "robot/chassis"
+      global_frame: "odom"
+      robot_base_frame: "base_link"
       use_sim_time: True
       rolling_window: true
       width: 3

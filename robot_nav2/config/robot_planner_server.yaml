@@ -1,4 +1,4 @@
-box_bot_1/planner_server:
+robot/planner_server:
   ros__parameters:
     expected_planner_frequency: 20.0
     use_sim_time: True
@@ -9,14 +9,14 @@ box_bot_1/planner_server:
       use_astar: false
       allow_unknown: true
 
-box_bot_1/global_costmap:
+robot/global_costmap:
   global_costmap:
     ros__parameters:
       update_frequency: 1.0
       publish_frequency: 1.0
       global_frame: map
       map_topic: "/map"
-      robot_base_frame: box_bot_1/chassis
+      robot_base_frame: base_link
       use_sim_time: True
       robot_radius: 0.181
       resolution: 0.05
@@ -27,7 +27,7 @@ box_bot_1/global_costmap:
         enabled: True
         observation_sources: scan
         scan:
-          topic: "scan" #/box_bot_1/scan
+          topic: "scan" #/robot/scan
           max_obstacle_height: 2.0
           clearing: True
           marking: True

@@ -28,7 +28,7 @@ def generate_launch_description():
         # Nodes for robot
 
         Node(
-            namespace='robot',
+            namespace='',
             package='nav2_controller',
             executable='controller_server',
             name='controller_server',
@@ -36,23 +36,23 @@ def generate_launch_description():
             parameters=[controller_yaml_robot]),
 
         Node(
-            namespace='robot',
+            namespace='',
             package='nav2_planner',
             executable='planner_server',
             name='planner_server',
             output='screen',
             parameters=[planner_yaml_robot]),
 
-        Node(
-            namespace='robot',
-            package='nav2_behaviors',
-            executable='behavior_server',
-            name='behavior_server',
-            parameters=[recovery_yaml_robot],
-            output='screen'),
+        # Node(
+        #     namespace='',
+        #     package='nav2_behaviors',
+        #     executable='behavior_server',
+        #     name='behavior_server',
+        #     parameters=[recovery_yaml_robot],
+        #     output='screen'),
 
         Node(
-            namespace='robot',
+            namespace='',
             package='nav2_bt_navigator',
             executable='bt_navigator',
             name='bt_navigator',
@@ -60,7 +60,7 @@ def generate_launch_description():
             parameters=[bt_navigator_yaml_robot, {"default_nav_to_pose_bt_xml": default_nav_to_pose_bt_xml_robot}]),
 
         Node(
-            namespace='robot',
+            namespace='',
             package='nav2_waypoint_follower',
             executable='waypoint_follower',
             name='waypoint_follower',
@@ -68,23 +68,23 @@ def generate_launch_description():
             parameters=[waypoints_yaml_robot]),        
 
 
-        Node(
-            package='nav2_lifecycle_manager',
-            executable='lifecycle_manager',
-            name='robot_lifecycle_manager_pathplanner',
-            output='screen',
-            parameters=[{'autostart': True},
-                        {'bond_timeout': 0.0},
-                        {'node_names': [
-                            'robot/planner_server',
-                            'robot/controller_server',
-                            'robot/behavior_server',
-                            'robot/bt_navigator',
-                            'robot/waypoint_follower'
-                        ]}]),
+        # Node(
+        #     package='nav2_lifecycle_manager',
+        #     executable='lifecycle_manager',
+        #     name='robot_lifecycle_manager_pathplanner',
+        #     output='screen',
+        #     parameters=[{'autostart': True},
+        #                 {'bond_timeout': 0.0},
+        #                 {'node_names': [
+        #                     'planner_server',
+        #                     'controller_server',
+        #                     # 'behavior_server',
+        #                     'bt_navigator',
+        #                     'waypoint_follower'
+        #                 ]}]),
 
         # Node(
-        #     namespace='robot',
+        #     namespace='',
         #     package='rviz2',
         #     executable='rviz2',
         #     name='rviz2',
